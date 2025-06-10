@@ -130,6 +130,31 @@ If you encounter any issues, please review the following common problems and sol
 
 If you’re still having trouble, feel free to check the [official Rails documentation](https://guides.rubyonrails.org/) or open an issue in the repository. We're happy to help!
 
+## Visual Aids
+
+Here are some visual aids to help you quickly understand the structure and flow of the app:
+
+### Players Index Page
+<img src="app/assets/images/players_index.png" alt="Players Index Page" width="600">
+
+### Players Show Page
+<img src="app/assets/images/players_show.png" alt="Players Show Page" width="600">
+
+### Add New Player Page
+<img src="app/assets/images/new_player.png" alt="Add New Player Page" width="600">
+
+### Teams Index Page
+<img src="app/assets/images/teams_index.png" alt="Teams Index Page" width="600">
+
+### Teams Show Page
+<img src="app/assets/images/teams_show.png" alt="Teams Show Page" width="600">
+
+### Add New Team Page
+<img src="app/assets/images/new_team.png" alt="Add New Team Page" width="600">
+
+### Database Schema (ERD)
+<img src="app/assets/images/erd.png" alt="Database Schema (ERD)" width="600">
+
 ## Contact   
 
 Margarita Potylitsyna - [margotugarina@gmail.com](mailto:margotugarina@gmail.com)
