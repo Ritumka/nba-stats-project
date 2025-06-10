@@ -48,7 +48,7 @@ rails db:create db:migrate
 ```
 6. To populate the database with initial data, run the sample data task (Weight Class 155 has the most users. Use this to test any features):
 ```bash
-bin/rails slurp:player_stats
+bin/rails slurp:players_teams
 ```
 
 ### Usage
