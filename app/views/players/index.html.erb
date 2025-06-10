@@ -1,14 +1,47 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Players</h1>
-
-<div id="players">
-  <% @players.each do |player| %>
-    <%= render player %>
-    <p>
-      <%= link_to "Show this player", player %>
-    </p>
-  <% end %>
+<div class="row mb-4">
+  <div class="col">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>NBA Players</h1>
+      <%= link_to new_player_path do %>
+        <i class="bi bi-plus-square fs-3"></i>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New player", new_player_path %>
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+  <% @players.each do |player| %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <% if player.image_url.present? %>
+          <%= image_tag player.image_url, class: "card-img-top", alt: player.name, style: "height: 250px; object-fit: cover;" %>
+        <% else %>
+          <div class="bg-light text-center py-5">
+            <i class="bi bi-person-circle" style="font-size: 5rem;"></i>
+          </div>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= player.name %></h5>
+          <p class="card-text text-muted"><%= player.team.name if player.team %></p>
+          <div class="d-flex justify-content-between">
+            <div class="stat">
+              <small class="text-muted">PPG</small>
+              <p class="mb-0 fw-bold"><%= player.points_per_game %></p>
+            </div>
+            <div class="stat">
+              <small class="text-muted">APG</small>
+              <p class="mb-0 fw-bold"><%= player.assists_per_game %></p>
+            </div>
+            <div class="stat">
+              <small class="text-muted">RPG</small>
+              <p class="mb-0 fw-bold"><%= player.rebounds_per_game %></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent">
+          <%= link_to "View Details", player_path(player), class: "btn btn-sm btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

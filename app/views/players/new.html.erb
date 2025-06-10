@@ -1,9 +1,98 @@
-<h1>New player</h1>
+<div class="row mb-4">
+  <div class="col">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Add New Player</h1>
+      <%= link_to players_path, class: "btn btn-outline-secondary" do %>
+        <i class="bi bi-arrow-left"></i> Back to Players
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<%= render "form", player: @player %>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with(model: @player, local: true) do |form| %>
+          <% if @player.errors.any? %>
+            <div class="alert alert-danger">
+              <h4><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h4>
+              <ul>
+                <% @player.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-<br>
+          <div class="mb-3">
+            <%= form.label :name, class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", required: true %>
+          </div>
 
-<div>
-  <%= link_to "Back to players", players_path %>
+          <div class="mb-3">
+            <%= form.label :team_id, "Team", class: "form-label" %>
+            <%= form.collection_select :team_id, Team.all.order(:name), :id, :name, 
+                { prompt: "Select a team" }, 
+                { class: "form-select" } %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :image_url, "Player Image URL", class: "form-label" %>
+            <%= form.text_field :image_url, class: "form-control" %>
+            <div class="form-text">Enter a URL for the player's image</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="mb-3">
+                <%= form.label :points_per_game, "Points Per Game", class: "form-label" %>
+                <%= form.number_field :points_per_game, class: "form-control", step: "0.1", min: 0 %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="mb-3">
+                <%= form.label :assists_per_game, "Assists Per Game", class: "form-label" %>
+                <%= form.number_field :assists_per_game, class: "form-control", step: "0.1", min: 0 %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="mb-3">
+                <%= form.label :rebounds_per_game, "Rebounds Per Game", class: "form-label" %>
+                <%= form.number_field :rebounds_per_game, class: "form-control", step: "0.1", min: 0 %>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <%= form.submit "Create Player", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Tips</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>
+            Select a team from the dropdown menu
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>
+            All stats should be entered as per-game averages
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>
+            For image URL, use a direct link to the player's image
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

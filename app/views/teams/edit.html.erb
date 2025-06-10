@@ -1,10 +1,75 @@
-<h1>Editing team</h1>
+<div class="row mb-4">
+  <div class="col">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Edit Team: <%= @team.name %></h1>
+      <%= link_to team_path(@team), class: "btn btn-outline-secondary" do %>
+        <i class="bi bi-arrow-left"></i> Back to Team
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<%= render "form", team: @team %>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with(model: @team, local: true) do |form| %>
+          <% if @team.errors.any? %>
+            <div class="alert alert-danger">
+              <h4><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h4>
+              <ul>
+                <% @team.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-<br>
+          <div class="mb-3">
+            <%= form.label :name, class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", required: true %>
+          </div>
 
-<div>
-  <%= link_to "Show this team", @team %> |
-  <%= link_to "Back to teams", teams_path %>
+          <div class="mb-3">
+            <%= form.label :image_url, "Team Logo URL", class: "form-label" %>
+            <%= form.text_field :image_url, class: "form-control" %>
+            <div class="form-text">Enter a URL for the team's logo</div>
+          </div>
+
+          <% if @team.image_url.present? %>
+            <div class="mb-3">
+              <label class="form-label">Current Logo</label>
+              <div>
+                <%= image_tag @team.image_url, alt: @team.name, style: "max-height: 100px; max-width: 100%;" %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="d-grid gap-2">
+            <%= form.submit "Update Team", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Tips</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>
+            Enter the full team name
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-info-circle text-primary me-2"></i>
+            For logo URL, use a direct link to the team's logo image
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
