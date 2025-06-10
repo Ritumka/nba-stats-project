@@ -4,6 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  assists_per_game  :float
+#  image_url         :string
 #  name              :string
 #  points_per_game   :float
 #  rebounds_per_game :integer

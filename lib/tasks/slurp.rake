@@ -1,5 +1,5 @@
 namespace :slurp do
-  desc "TODO"
+  desc "Create sample data for players and teams table"
   task players_teams: :environment do
     require "csv"
 
@@ -33,6 +33,7 @@ namespace :slurp do
       p.points_per_game = row["points_per_game"]
       p.rebounds_per_game = row["rebounds_per_game"]
       p.assists_per_game = row["assist_per_game"]
+      p.image_url = row["image_url"]
       p.save
     end
 
