@@ -1,10 +1,87 @@
-<p style="color: green"><%= notice %></p>
+<div class="row mb-4">
+  <div class="col-md-8">
+    <h1><%= @player.name %></h1>
+  </div>
+  <div class="col-md-4 text-md-end">
+    <%= link_to edit_player_path(@player), class: "btn btn-outline-primary me-2" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= button_to player_path(@player), 
+        method: :delete, 
+        form: { data: { turbo_confirm: "Are you sure you want to delete #{@player.name}?" }, class: "d-inline" },
+        class: "btn btn-outline-danger me-2" do %>
+      <i class="bi bi-trash"></i>
+    <% end %>
+    <%= link_to players_path, class: "btn btn-outline-secondary" do %>
+      <i class="bi bi-arrow-left"></i> Back to Players
+    <% end %>
+  </div>
+</div>
 
-<%= render @player %>
-
-<div>
-  <%= link_to "Edit this player", edit_player_path(@player) %> |
-  <%= link_to "Back to players", players_path %>
-
-  <%= button_to "Destroy this player", @player, method: :delete %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-4">
+      <% if @player.image_url.present? %>
+        <%= image_tag @player.image_url, class: "card-img-top", alt: @player.name, style: "height: 400px; object-fit: cover;" %>
+      <% else %>
+        <div class="bg-light text-center py-5">
+          <i class="bi bi-person-circle" style="font-size: 5rem;"></i>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="col-md-8">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3 class="mb-0">Stats</h3>
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-md-4 mb-3">
+            <div class="p-3 bg-light rounded">
+              <h6 class="text-muted mb-1">Points Per Game</h6>
+              <h2 class="mb-0"><%= @player.points_per_game %></h2>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="p-3 bg-light rounded">
+              <h6 class="text-muted mb-1">Assists Per Game</h6>
+              <h2 class="mb-0"><%= @player.assists_per_game %></h2>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="p-3 bg-light rounded">
+              <h6 class="text-muted mb-1">Rebounds Per Game</h6>
+              <h2 class="mb-0"><%= @player.rebounds_per_game %></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Team</h3>
+      </div>
+      <div class="card-body">
+        <% if @player.team %>
+          <div class="d-flex align-items-center">
+            <% if @player.team.image_url.present? %>
+              <%= image_tag @player.team.image_url, class: "me-3", alt: @player.team.name, style: "height: 80px; width: 80px; object-fit: contain;" %>
+            <% end %>
+            <div>
+              <h4><%= @player.team.name %></h4>
+              <%= link_to "View Team", team_path(@player.team), class: "btn btn-sm btn-outline-primary" %>
+            </div>
+          </div>
+        <% else %>
+          <p>No team assigned</p>
+          <%= link_to edit_player_path(@player), class: "btn btn-sm btn-outline-primary" do %>
+            <i class="bi bi-pencil-square"></i> Assign Team
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

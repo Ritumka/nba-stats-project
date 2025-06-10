@@ -1,10 +1,84 @@
-<p style="color: green"><%= notice %></p>
+<div class="row mb-4">
+  <div class="col-md-8">
+    <h1><%= @team.name %></h1>
+  </div>
+  <div class="col-md-4 text-md-end">
+    <%= link_to edit_team_path(@team), class: "btn btn-outline-primary me-2" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= button_to team_path(@team), 
+        method: :delete, 
+        form: { data: { turbo_confirm: "Are you sure you want to delete #{@team.name}? This will remove all associated data." }, class: "d-inline" },
+        class: "btn btn-outline-danger me-2" do %>
+      <i class="bi bi-trash"></i>
+    <% end %>
+    <%= link_to teams_path, class: "btn btn-outline-secondary" do %>
+      <i class="bi bi-arrow-left"></i> Back to Teams
+    <% end %>
+  </div>
+</div>
 
-<%= render @team %>
-
-<div>
-  <%= link_to "Edit this team", edit_team_path(@team) %> |
-  <%= link_to "Back to teams", teams_path %>
-
-  <%= button_to "Destroy this team", @team, method: :delete %>
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card mb-4">
+      <% if @team.image_url.present? %>
+        <%= image_tag @team.image_url, class: "card-img-top", alt: @team.name, style: "height: 300px; object-fit: contain; padding: 20px;" %>
+      <% else %>
+        <div class="bg-light text-center py-5">
+          <i class="bi bi-shield" style="font-size: 5rem;"></i>
+        </div>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @team.name %></h5>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-8">
+    <h3>Players</h3>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>PPG</th>
+            <th>APG</th>
+            <th>RPG</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @team.players.any? %>
+            <% @team.players.each do |player| %>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <% if player.image_url.present? %>
+                      <%= image_tag player.image_url, class: "rounded-circle me-2", alt: player.name, style: "width: 40px; height: 40px; object-fit: cover;" %>
+                    <% end %>
+                    <%= player.name %>
+                  </div>
+                </td>
+                <td><%= player.points_per_game %></td>
+                <td><%= player.assists_per_game %></td>
+                <td><%= player.rebounds_per_game %></td>
+                <td>
+                  <%= link_to "View", player_path(player), class: "btn btn-sm btn-outline-primary" %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5" class="text-center py-4">
+                <p class="text-muted mb-0">No players on this team yet</p>
+                <%= link_to new_player_path, class: "btn btn-sm btn-primary mt-2" do %>
+                  <i class="bi bi-plus-square"></i> Add Player
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

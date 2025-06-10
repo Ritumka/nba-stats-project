@@ -17,6 +17,7 @@ namespace :slurp do
       t = Team.new
       t.id = row["id"]
       t.name = row["name"]
+      t.image_url = row["image_url"]
       t.save
     end
 
@@ -32,7 +33,7 @@ namespace :slurp do
       p.name = row["name"]
       p.points_per_game = row["points_per_game"]
       p.rebounds_per_game = row["rebounds_per_game"]
-      p.assists_per_game = row["assist_per_game"]
+      p.assists_per_game = row["assists_per_game"]
       p.image_url = row["image_url"]
       p.save
     end
