@@ -1,4 +1,4 @@
-# NBA stats project
+# 🏀 NBA stats project
 
 ## Description
 Track real-time stats and deep insights on NBA players and teams—all in one powerful app.
