@@ -53,3 +53,15 @@ if Rails.env.development?
     Player.destroy_all
   end
 ```
+
+- To look by team_name: 
+
+```ruby
+   team_id = team_ids_by_name[row["team_name"]]
+    unless team_id
+      puts "⚠️ Team not found for player #{row["name"]} - team_name: #{row["team_name"]}"
+      next
+    end
+```
+
+and add: `p.team_id = team_id` and update CSV
