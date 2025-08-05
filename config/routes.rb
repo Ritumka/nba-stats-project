@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
   resources :players
   resources :teams
+
+  devise_for :users, controllers: {
+    omniauth_callbacks: "omniauth_callbacks",
+  }
 
   root "players#index"
 
