@@ -30,6 +30,27 @@
             </li>
           </ul>
         </div>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+          <ul class="navbar-nav ms-auto d-flex align-items-center gap-2">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </nav>
 
